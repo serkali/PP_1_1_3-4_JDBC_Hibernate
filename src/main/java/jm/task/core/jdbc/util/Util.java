@@ -27,7 +27,6 @@ public class Util {
                     .addAnnotatedClass(User.class);
             StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties());
             sessionFactory = configuration.buildSessionFactory(builder.build());
-
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("Исключение!" + e);
@@ -39,9 +38,14 @@ public class Util {
         return sessionFactory;
     }
 
-    public static void shutdown() {
-        getSessionFactory().close();
+    public static void connectionClose() {
+        try {
+            getConnection().close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
+
 
     public static Connection getConnection() {
         Connection connection = null;
