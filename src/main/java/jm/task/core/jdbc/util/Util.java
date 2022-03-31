@@ -38,12 +38,8 @@ public class Util {
         return sessionFactory;
     }
 
-    public static void connectionClose() {
-        try {
-            getConnection().close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+    public static void sessionClose(){
+        sessionFactory.close();
     }
 
 
